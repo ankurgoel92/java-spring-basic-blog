@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.function.Predicate;
 import org.springframework.stereotype.Component;
 import com.pluralsight.blog.model.Post;
 
@@ -48,6 +49,7 @@ public class PostRepository {
   }
 
   public Post findById(Long id) {
-    return null;
+    final Predicate<Post> idMatches = post -> post.getId() == id;
+    return ALL_POSTS.stream().filter(idMatches).findFirst().orElse(null);
   }
 }
